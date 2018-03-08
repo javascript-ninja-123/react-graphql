@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import SongList from './SongList/SongList'
+
 
 
  class APP extends Component {
@@ -7,7 +7,7 @@ import SongList from './SongList/SongList'
     render() {
         return (
             <div className="class-name">
-                <SongList/>
+
             </div>
         );
     }

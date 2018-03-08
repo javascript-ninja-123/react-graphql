@@ -2,9 +2,16 @@
   "name": "reacttest",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+  "/graphql/*": {
+    "target": "http://localhost:4000"
+  }
+},
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.9",
     "apollo-client": "^2.2.5",
+    "apollo-client-preset": "^1.0.8",
+    "apollo-link": "^1.2.1",
     "apollo-link-http": "^1.5.3",
     "fetch-mock": "^5.13.1",
     "graphql-tag": "^2.8.0",

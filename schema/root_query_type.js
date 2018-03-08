@@ -10,7 +10,7 @@ const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: () => ({
     songs: {
-      type: new GraphQLList(SongType),
+      type: new GraphQLList(require('./song_type')),
       resolve() {
         return Song.find({});
       }

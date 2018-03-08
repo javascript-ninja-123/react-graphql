@@ -8,6 +8,8 @@ import createHistory from 'history/createBrowserHistory'
 import { BrowserRouter, Route,Switch } from 'react-router-dom'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 import {createEpicMiddleware} from 'redux-observable';
+//appoli
+import { ApolloLink } from 'apollo-link';
 import { ApolloClient } from 'apollo-client';
 import {ApolloProvider} from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
@@ -16,6 +18,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 
 import APP from './components/App';
+import Songlist from './components/SongList/SongList';
+import CreateNewSong from './components/CreateSong/CreateSong';
+import SongDetail from './components/SongDetail/SongDetail';
 import reducers from './reducers';
 
 
@@ -41,14 +46,14 @@ const store = createStore(
 
 ReactDOM.render(
   <ApolloProvider  client={client}>
-     <HttpsRedirect>
     <ConnectedRouter history={history} store={store}>
       <div>
         <Switch>
-          <Route path='/' component={APP}/>
+          <Route path='/detail/:id' component={SongDetail}/>
+          <Route path='/create' component={CreateNewSong}/>
+          <Route path='/' component={Songlist}/>
         </Switch>
       </div>
     </ConnectedRouter>
-     </HttpsRedirect>
   </ApolloProvider>
   , document.getElementById('root'));
