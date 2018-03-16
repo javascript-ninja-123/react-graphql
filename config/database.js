@@ -1,14 +1,24 @@
-const mongoose = require('mongoose');
-const {MONGO_URI} = require('./secret');
+const admin = require('firebase-admin');
+const {DATABASE_NAME} = require('./secret');
+
+const serviceAccount = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: `https://${DATABASE_NAME}.firebaseio.com`
+});
 
 
-// Replace with your mongoLab URI
-if (!MONGO_URI) {
-  throw new Error('You must provide a MongoLab URI');
+const db = admin.database();
+
+///databsae ref
+const ref = db.ref("server");
+const songRef = ref.child('song');
+const lyricRef = ref.child('lyric');
+
+
+module.exports = {
+  ref,
+  songRef,
+  lyricRef
 }
-
-mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URI);
-mongoose.connection
-    .once('open', () => console.log('Connected to MongoLab instance.'))
-    .on('error', error => console.log('Error connecting to MongoLab:', error));

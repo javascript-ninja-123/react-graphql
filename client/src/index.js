@@ -18,9 +18,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 
 import APP from './components/App';
-import Songlist from './components/SongList/SongList';
-import CreateNewSong from './components/CreateSong/CreateSong';
-import SongDetail from './components/SongDetail/SongDetail';
+import SongList from './components/SongList/SongList';
 import reducers from './reducers';
 
 
@@ -28,7 +26,9 @@ import rootEpic from './epics';
 
 const client = new ApolloClient({
   link: new HttpLink(),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: object => object.id
+  }),
 })
 const epicMiddleware = createEpicMiddleware(rootEpic);
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -49,9 +49,7 @@ ReactDOM.render(
     <ConnectedRouter history={history} store={store}>
       <div>
         <Switch>
-          <Route path='/detail/:id' component={SongDetail}/>
-          <Route path='/create' component={CreateNewSong}/>
-          <Route path='/' component={Songlist}/>
+          <Route path='/' component={SongList}/>
         </Switch>
       </div>
     </ConnectedRouter>

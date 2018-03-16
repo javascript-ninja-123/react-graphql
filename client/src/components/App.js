@@ -7,7 +7,7 @@ import React,{Component} from 'react';
     render() {
         return (
             <div className="class-name">
-
+                  Hi
             </div>
         );
     }
